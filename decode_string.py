@@ -22,4 +22,4 @@ class Solution:
 
 sol = Solution()
 
-print(sol.decodeString("3[a2[bc]]"))
+print(sol.decodeString("3[2[bc]]"))
