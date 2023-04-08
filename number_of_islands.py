@@ -8,19 +8,20 @@ class Solution:
         count = 0
 
         def dfs(r, c):
-            if ((r not in range(ROWS)) or
-                (c not in range(COLS)) or
-                ((r, c) in visited)
-                    or grid[r][c] == '0'):
+            if (
+                (r < 0 or r >= ROWS) or
+                (c < 0 or c >= COLS) or
+                ((r, c) in visited) or
+                    grid[r][c] == "0"):
                 return
             visited.add((r, c))
+
             direction = [[1, 0], [-1, 0], [0, 1], [0, -1]]
             for dr, dc in direction:
                 dfs(r + dr, c + dc)
-
         for r in range(ROWS):
             for c in range(COLS):
-                if grid[r][c] == '1' and (r, c) not in visited:
+                if not (r, c) in visited and grid[r][c] == "1":
                     count += 1
                     dfs(r, c)
 
