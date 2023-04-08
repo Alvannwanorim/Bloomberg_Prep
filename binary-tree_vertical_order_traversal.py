@@ -11,17 +11,17 @@ class NodeTree:
 
 class Solution:
     def traversal(self, root: Optional[NodeTree]) -> List[List[int]]:
+        queue = deque([(root, 0)])
         left, right = 0, 0
         table = defaultdict(list)
-        queue = deque([(root, 0)])
 
         while queue:
             node, col = queue.popleft()
 
             if node is not None:
                 table[col].append(node.val)
-                right = max(right, col)
                 left = min(left, col)
+                right = max(right, col)
                 queue.append((node.right, col + 1))
                 queue.append((node.left, col - 1))
 
