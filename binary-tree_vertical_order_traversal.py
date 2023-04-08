@@ -14,18 +14,25 @@ class Solution:
         queue = deque([(root, 0)])
         left, right = 0, 0
         table = defaultdict(list)
+        if not root:
+            return []
 
         while queue:
             node, col = queue.popleft()
 
-            if node is not None:
-                table[col].append(node.val)
-                left = min(left, col)
-                right = max(right, col)
-                queue.append((node.right, col + 1))
+            table[col].append(node.val)
+            if node.left:
                 queue.append((node.left, col - 1))
+            if node.right:
+                queue.append((node.right, col + 1))
 
-        return [table[x] for x in range(left, right + 1)]
+        left = min(table.keys())
+        right = max(table.keys())
+        res = []
+        for col in range(left, right + 1):
+            res.append(table[col])
+
+        return res
 
 
 node1 = NodeTree(1)
